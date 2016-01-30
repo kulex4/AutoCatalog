@@ -1,8 +1,8 @@
 package com.bsuir.controller;
 
-import com.bsuir.data.domain.Advert;
-import com.bsuir.data.domain.Seller;
+import com.bsuir.data.domain.*;
 import com.bsuir.data.service.AdvertService;
+import com.bsuir.data.utils.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +16,13 @@ public class AdvertController {
     @Autowired
     AdvertService advertService;
 
+    @Autowired
+    DataGenerator dataGenerator;
+
     @RequestMapping(value = { "/adverts-all" }, method = RequestMethod.GET)
     public String allAdvertsPage(Map<String, Object> model) {
         Iterable<Advert> adverts = advertService.findAll();
+        model.put("adverts", adverts);
         return "adverts-all";
     }
 

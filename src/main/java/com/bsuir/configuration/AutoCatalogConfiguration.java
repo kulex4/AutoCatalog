@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
@@ -24,7 +25,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.bsuir.controller", "com.bsuir.data.domain", "com.bsuir.data.repository", "com.bsuir.data.service"})
+@ComponentScan("com.bsuir")
 @EnableJpaRepositories("com.bsuir.data.repository")
 @PropertySource( value = { "classpath:application.properties" })
 public class AutoCatalogConfiguration extends WebMvcConfigurerAdapter {
@@ -64,10 +65,17 @@ public class AutoCatalogConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @Bean
+    public JpaTransactionManager transactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+        return transactionManager;
+    }
+
+    @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.bsuir");
+        /*sessionFactory.setPackagesToScan("com.bsuir");*/
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -82,12 +90,12 @@ public class AutoCatalogConfiguration extends WebMvcConfigurerAdapter {
         return properties;
     }
 
-    @Bean
+    /*@Bean
     public HibernateTransactionManager transactionManager(SessionFactory sf) {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(sf);
         return txManager;
-    }
+    }*/
 
     /*
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...

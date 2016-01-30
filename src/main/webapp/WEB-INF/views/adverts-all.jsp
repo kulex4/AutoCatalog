@@ -34,13 +34,19 @@
             <span class="lead">All Advertisements</span>
         </div>
         <table cellspacing="0" class="table table-hover" style="overflow:scroll">
-
             <tbody>
-            <%--<c:forEach items="${menu}" var="menuCategory">
-                <tr style="width: 100%">
-                    <th>${menuCategory.name}</th>
+            <c:forEach items="${adverts}" var="advert">
+
+                <tr>
+                    <td>${advert.dateOfPublication}</td>
+                    <td>${advert.auto}</td>
+                    <td>${advert.seller}</td>
                 </tr>
-                <c:forEach items="${menuCategory.menu}" var="menuItem">
+
+                <%--<tr style="width: 100%">
+                    <th>${advert.name}</th>
+                </tr>
+                <c:forEach items="${advert.menu}" var="menuItem">
                     &lt;%&ndash;<tr>
                         <td>
                             <img src="${menuItem.image}" style="width:125px; height:125px"/>
@@ -67,8 +73,8 @@
                         </div>
                         </td>
                     </tr>
-                </c:forEach>
-            </c:forEach>--%>
+                </c:forEach>--%>
+            </c:forEach>
             </tbody>
         </table>
     </div>

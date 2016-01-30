@@ -18,11 +18,11 @@ public class Advert {
     @Column (name = "date_of_publication")
     private Date dateOfPublication;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "id_auto")
     private Auto auto;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "id_seller")
     private Seller seller;
 

@@ -10,4 +10,6 @@ public interface AdvertService {
 
     Iterable<Advert> findBySeller(Seller seller);
 
+    void saveOrUpdate(Advert advert);
+
 }

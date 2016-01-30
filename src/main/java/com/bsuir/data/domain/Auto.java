@@ -23,27 +23,31 @@ public class Auto {
     @Column(name = "mileage")
     private int mileage;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "idTransmission")
     private Transmission transmission;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "idBodyType")
     private BodyType bodyType;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "idColor")
     private Color color;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "idState")
     private State state;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "idEngineType")
     private EngineType engineType;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name = "brand")
+    private Brand brand;
+
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "idModel")
     private Model model;
 
@@ -119,6 +123,14 @@ public class Auto {
         this.engineType = engineType;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
     public Model getModel() {
         return model;
     }
@@ -146,6 +158,7 @@ public class Auto {
         if (getState() != null ? !getState().equals(auto.getState()) : auto.getState() != null) return false;
         if (getEngineType() != null ? !getEngineType().equals(auto.getEngineType()) : auto.getEngineType() != null)
             return false;
+        if (getBrand() != null ? !getBrand().equals(auto.getBrand()) : auto.getBrand() != null) return false;
         return getModel() != null ? getModel().equals(auto.getModel()) : auto.getModel() == null;
 
     }
@@ -161,6 +174,7 @@ public class Auto {
         result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
         result = 31 * result + (getState() != null ? getState().hashCode() : 0);
         result = 31 * result + (getEngineType() != null ? getEngineType().hashCode() : 0);
+        result = 31 * result + (getBrand() != null ? getBrand().hashCode() : 0);
         result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
         return result;
     }
@@ -177,6 +191,7 @@ public class Auto {
                 ", color=" + color +
                 ", state=" + state +
                 ", engineType=" + engineType +
+                ", brand=" + brand +
                 ", model=" + model +
                 '}';
     }

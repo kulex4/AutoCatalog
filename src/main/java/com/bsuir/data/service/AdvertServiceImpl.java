@@ -23,4 +23,8 @@ public class AdvertServiceImpl implements AdvertService {
         //advertRepository.findBySeller(seller);
         return null;
     }
+
+    public void saveOrUpdate(Advert advert) {
+        advertRepository.save(advert);
+    }
 }
