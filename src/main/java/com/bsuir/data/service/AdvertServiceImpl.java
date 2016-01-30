@@ -1,6 +1,7 @@
 package com.bsuir.data.service;
 
 import com.bsuir.data.domain.Advert;
+import com.bsuir.data.domain.Seller;
 import com.bsuir.data.repository.AdvertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,10 @@ public class AdvertServiceImpl implements AdvertService {
 
     public Iterable<Advert> findAll() {
         return advertRepository.findAll();
+    }
+
+    public Iterable<Advert> findBySeller(Seller seller) {
+        //advertRepository.findBySeller(seller);
+        return null;
     }
 }
