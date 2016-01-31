@@ -1,6 +1,5 @@
 package com.bsuir.data.service;
 
-
 import com.bsuir.data.domain.Advert;
 import com.bsuir.data.domain.Seller;
 

@@ -1,5 +1,6 @@
-package com.bsuir.data.domain;
+package com.bsuir.data.domain.dto;
 
+import com.bsuir.data.domain.Seller;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "advert")
-public class Advert {
+public class AdvertDto {
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -20,7 +21,7 @@ public class Advert {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_auto")
-    private Auto auto;
+    private AutoDto autoDto;
 
     @ManyToOne(cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "id_seller")
@@ -42,12 +43,12 @@ public class Advert {
         this.dateOfPublication = dateOfPublication;
     }
 
-    public Auto getAuto() {
-        return auto;
+    public AutoDto getAutoDto() {
+        return autoDto;
     }
 
-    public void setAuto(Auto auto) {
-        this.auto = auto;
+    public void setAutoDto(AutoDto autoDto) {
+        this.autoDto = autoDto;
     }
 
     public Seller getSeller() {
@@ -63,13 +64,14 @@ public class Advert {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Advert advert = (Advert) o;
+        AdvertDto advertDto = (AdvertDto) o;
 
-        if (getId() != null ? !getId().equals(advert.getId()) : advert.getId() != null) return false;
-        if (getDateOfPublication() != null ? !getDateOfPublication().equals(advert.getDateOfPublication()) : advert.getDateOfPublication() != null)
+        if (getId() != null ? !getId().equals(advertDto.getId()) : advertDto.getId() != null) return false;
+        if (getDateOfPublication() != null ? !getDateOfPublication().equals(advertDto.getDateOfPublication()) : advertDto.getDateOfPublication() != null)
             return false;
-        if (getAuto() != null ? !getAuto().equals(advert.getAuto()) : advert.getAuto() != null) return false;
-        return getSeller() != null ? getSeller().equals(advert.getSeller()) : advert.getSeller() == null;
+        if (getAutoDto() != null ? !getAutoDto().equals(advertDto.getAutoDto()) : advertDto.getAutoDto() != null)
+            return false;
+        return getSeller() != null ? getSeller().equals(advertDto.getSeller()) : advertDto.getSeller() == null;
 
     }
 
@@ -77,17 +79,17 @@ public class Advert {
     public int hashCode() {
         int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + (getDateOfPublication() != null ? getDateOfPublication().hashCode() : 0);
-        result = 31 * result + (getAuto() != null ? getAuto().hashCode() : 0);
+        result = 31 * result + (getAutoDto() != null ? getAutoDto().hashCode() : 0);
         result = 31 * result + (getSeller() != null ? getSeller().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Advert{" +
+        return "AdvertDto{" +
                 "id=" + id +
                 ", dateOfPublication=" + dateOfPublication +
-                ", auto=" + auto +
+                ", autoDto=" + autoDto +
                 ", seller=" + seller +
                 '}';
     }

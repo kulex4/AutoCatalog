@@ -1,8 +1,10 @@
 package com.bsuir.data.domain;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "auto")
@@ -23,31 +25,31 @@ public class Auto {
     @Column(name = "mileage")
     private int mileage;
 
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "idTransmission")
     private Transmission transmission;
 
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "idBodyType")
     private BodyType bodyType;
 
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "idColor")
     private Color color;
 
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "idState")
     private State state;
 
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "idEngineType")
     private EngineType engineType;
 
-    @OneToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name = "brand")
+    @OneToOne
+    @JoinColumn(name = "idBrand")
     private Brand brand;
 
-    @OneToOne(cascade=CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "idModel")
     private Model model;
 
