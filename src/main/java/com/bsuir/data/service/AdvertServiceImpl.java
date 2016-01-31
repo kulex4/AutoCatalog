@@ -20,11 +20,14 @@ public class AdvertServiceImpl implements AdvertService {
     }
 
     public Iterable<Advert> findBySeller(Seller seller) {
-        //advertRepository.findBySeller(seller);
-        return null;
+        return advertRepository.findBySeller(seller);
     }
 
     public void saveOrUpdate(Advert advert) {
         advertRepository.save(advert);
+    }
+
+    public void removeById(Long id) {
+        advertRepository.delete(id);
     }
 }

@@ -12,4 +12,6 @@ public interface AdvertService {
 
     void saveOrUpdate(Advert advert);
 
+    void removeById(Long id);
+
 }

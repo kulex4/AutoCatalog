@@ -6,24 +6,30 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>All Advertisements</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="/static/js/libs/jquery/jquery.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap-responsive.min.css" media="screen" />
 </head>
 <body>
 
-<div class="panel-heading" style="position: fixed; width: 100%">
-    <span class="lead">Auto Catalog</span>
+<div style="text-align: center;">
+    <h2>Auto Catalog</h2>
 </div>
-<div class="menu-bar" style="position: fixed; margin-top: 50px;">
-    <ul class="menu-container">
-        <li class="active"><a href="/home"><span>Home</span></a></li>
-        <li class="menu-li"><a href="/adverts-all">All Advertisements</a></li>
-        <sec:authorize access="isAuthenticated()">
-            <li class="menu-li"><a href="/adverts-own">Own Advertisements</a></li>
-            <li class="menu-li"><a href="/advert-create">Create Advertisement</a></li>
-        </sec:authorize>
-        <ul style="float:right;list-style-type:none;">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a  href="/home"><img src="/static/images/banner_96x50.jpg" style="height: 50px;"/></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="menu-li"><a href="/adverts-all">All Advertisements</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <sec:authorize access="isAuthenticated()">
+                <li class="menu-li"><a href="/adverts-own">Own Advertisements</a></li>
+                <li class="menu-li"><a href="/advert-create">Create Advertisement</a></li>
+            </sec:authorize>
             <li class="menu-li">
                 <sec:authorize access="!isAuthenticated()">
                     <a href="/login">Login</a>
@@ -33,59 +39,53 @@
                 </sec:authorize>
             </li>
         </ul>
-    </ul>
-</div>
-
-<div class="generic-container"  style="float: left; margin-top: 120px">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="lead">All Advertisements</span>
-        </div>
-        <table cellspacing="0" class="table table-hover" style="overflow:scroll">
-            <tbody>
-            <c:forEach items="${adverts}" var="advert">
-
-                <tr>
-                    <td>${advert.dateOfPublication}</td>
-                    <td>${advert.auto}</td>
-                    <td>${advert.seller}</td>
-                </tr>
-
-                <%--<tr style="width: 100%">
-                    <th>${advert.name}</th>
-                </tr>
-                <c:forEach items="${advert.menu}" var="menuItem">
-                    &lt;%&ndash;<tr>
-                        <td>
-                            <img src="${menuItem.image}" style="width:125px; height:125px"/>
-                        </td>
-                        <td>${menuItem.in_category_id}</td>
-                        <td>${menuItem.title}</td>
-                        <td>${menuItem.weight}</td>
-                        <td>${menuItem.cost}</td>
-                    </tr>&ndash;%&gt;
-                    <tr>
-                        <td valign="top">
-                        <div align="top" style="float: left">
-                            <div  onclick='onMenuItemClick(${menuItem.dish_id}, ${menuItem.in_category_id}, ${menuItem.cost})'
-                                  style="float: left; display: inline-block">
-                                <img src="${menuItem.image}" style="width:130px; height:130px;"/>
-                            </div>
-                            <div style="float: left; margin-left: 20px; width: 500px">
-                                <div><h><p style="font-weight: bold" id="dish-title-${menuItem.dish_id}">${menuItem.title}</p></h></div>
-                                <div><span>${menuItem.description}</span></div>
-                                <div><span>Вес: ${menuItem.weight}</span></div>
-                                <div><span>Стоимость: ${menuItem.cost}</span></div>
-                                <div><span>Номер: ${menuItem.in_category_id}</span></div>
-                            </div>
-                        </div>
-                        </td>
-                    </tr>
-                </c:forEach>--%>
-            </c:forEach>
-            </tbody>
-        </table>
     </div>
+</nav>
+
+<div class="span9" style="height: 95%; width: 95%;">
+    <c:forEach items="${adverts}" var="advert">
+        <div class='panel panel-default' style="width: 50%; margin: 0 auto;">
+            <div class='panel-heading'>
+                -
+                <div style="float: left;">
+                    <table>
+                        <tr>
+                            <td width='40px'>${advert.auto.brand.name}</td>
+                            <td width='40px'>${advert.auto.model.name}</td>
+                            <td width='80px'>${advert.auto.year}</td>
+                            <td width='100px'>${advert.auto.mileage} km</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="float: right;">
+                    <table>
+                        <tr>
+                            <td width='50px'>${advert.auto.state.name}</td>
+                            <td width='100px'>${advert.auto.price} $</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class='panel-body'>
+                Body type: ${advert.auto.bodyType.name}<br/>
+                Engine type: ${advert.auto.engineType.name}<br/>
+                Transmission: ${advert.auto.transmission.name}<br/>
+                Color: ${advert.auto.color.name}
+            </div>
+            <div class='panel-footer'>
+                -
+                <div style="float: right;">
+                    <table>
+                        <tr>
+                            <td width='140px' style="float: right;">${advert.seller.name}</td>
+                            <td width='120px'>${advert.seller.phone}</td>
+                            <td width='140px' style="float: right;">${advert.seller.email}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </c:forEach>
 </div>
 
 </body>

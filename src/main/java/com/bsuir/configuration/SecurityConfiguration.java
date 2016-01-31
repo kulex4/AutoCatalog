@@ -29,10 +29,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/adverts-all")
                 .permitAll()
-                .and()
-                .authorizeRequests()
+                .and().authorizeRequests()
                 .antMatchers("/adverts-own", "/advert-create")
-                .authenticated();
+                .authenticated()
+                .and().authorizeRequests()
+                .antMatchers("/resources/**", "/**").permitAll();
 
         http
                 .formLogin()

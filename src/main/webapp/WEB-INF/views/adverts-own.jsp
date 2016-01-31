@@ -6,24 +6,30 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Own Advertisements</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="/static/js/libs/jquery/jquery.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap-responsive.min.css" media="screen" />
 </head>
 <body>
 
-<div class="panel-heading" style="position: fixed; width: 100%">
-    <span class="lead">Auto Catalog</span>
+<div style="text-align: center;">
+    <h2>Auto Catalog</h2>
 </div>
-<div class="menu-bar" style="position: fixed; margin-top: 50px;">
-    <ul class="menu-container">
-        <li class="active"><a href="/home"><span>Home</span></a></li>
-        <li class="menu-li"><a href="/adverts-all">All Advertisements</a></li>
-        <sec:authorize access="isAuthenticated()">
-            <li class="menu-li"><a href="/adverts-own">Own Advertisements</a></li>
-            <li class="menu-li"><a href="/advert-create">Create Advertisement</a></li>
-        </sec:authorize>
-        <ul style="float:right;list-style-type:none;">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a  href="/home"><img src="/static/images/banner_96x50.jpg" style="height: 50px;"/></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="menu-li"><a href="/adverts-all">All Advertisements</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <sec:authorize access="isAuthenticated()">
+                <li class="menu-li"><a href="/adverts-own">Own Advertisements</a></li>
+                <li class="menu-li"><a href="/advert-create">Create Advertisement</a></li>
+            </sec:authorize>
             <li class="menu-li">
                 <sec:authorize access="!isAuthenticated()">
                     <a href="/login">Login</a>
@@ -33,7 +39,53 @@
                 </sec:authorize>
             </li>
         </ul>
-    </ul>
+    </div>
+</nav>
+
+<div class="span9" style="height: 95%; width: 95%;">
+    <c:forEach items="${adverts}" var="advert">
+        <div class='panel panel-default' style="width: 50%; margin: 0 auto;">
+            <div class='panel-heading'>
+                -
+                <div style="float: left;">
+                    <table>
+                        <tr>
+                            <td width='40px'>${advert.auto.brand.name}</td>
+                            <td width='40px'>${advert.auto.model.name}</td>
+                            <td width='80px'>${advert.auto.year}</td>
+                            <td width='100px'>${advert.auto.mileage} km</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="float: right;">
+                    <table>
+                        <tr>
+                            <td width='50px'>${advert.auto.state.name}</td>
+                            <td width='100px'>${advert.auto.price} $</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class='panel-body'>
+                Body type: ${advert.auto.bodyType.name}<br/>
+                Engine type: ${advert.auto.engineType.name}<br/>
+                Transmission: ${advert.auto.transmission.name}<br/>
+                Color: ${advert.auto.color.name}
+            </div>
+            <div class='panel-footer'>
+                <a href="<c:url value='/advert-delete-${advert.id}' />" class="btn custom-width">Remove</a>
+                <div style="float: right;">
+                    <table>
+                        <tr>
+                            <td width='140px' style="float: right;">${advert.seller.name}</td>
+                            <td width='120px'>${advert.seller.phone}</td>
+                            <td width='140px' style="float: right;">${advert.seller.email}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </c:forEach>
 </div>
 
 </body>

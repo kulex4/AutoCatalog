@@ -10,4 +10,6 @@ public interface SellerService extends UserDetailsService {
 
     UserDetails loadUserByUsername(String email);
 
+    Seller findByLogin(String login);
+
 }

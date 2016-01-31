@@ -6,24 +6,30 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Create Advertisement</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="/static/js/libs/jquery/jquery.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap-responsive.min.css" media="screen" />
 </head>
 <body>
 
-<div class="panel-heading" style="position: fixed; width: 100%">
-    <span class="lead">Auto Catalog</span>
+<div style="text-align: center;">
+    <h2>Auto Catalog</h2>
 </div>
-<div class="menu-bar" style="position: fixed; margin-top: 50px;">
-    <ul class="menu-container">
-        <li class="active"><a href="/home"><span>Home</span></a></li>
-        <li class="menu-li"><a href="/adverts-all">All Advertisements</a></li>
-        <sec:authorize access="isAuthenticated()">
-            <li class="menu-li"><a href="/adverts-own">Own Advertisements</a></li>
-            <li class="menu-li"><a href="/advert-create">Create Advertisement</a></li>
-        </sec:authorize>
-        <ul style="float:right;list-style-type:none;">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a  href="/home"><img src="/static/images/banner_96x50.jpg" style="height: 50px;"/></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="menu-li"><a href="/adverts-all">All Advertisements</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <sec:authorize access="isAuthenticated()">
+                <li class="menu-li"><a href="/adverts-own">Own Advertisements</a></li>
+                <li class="menu-li"><a href="/advert-create">Create Advertisement</a></li>
+            </sec:authorize>
             <li class="menu-li">
                 <sec:authorize access="!isAuthenticated()">
                     <a href="/login">Login</a>
@@ -33,8 +39,8 @@
                 </sec:authorize>
             </li>
         </ul>
-    </ul>
-</div>
+    </div>
+</nav>
 
 </body>
 </html>

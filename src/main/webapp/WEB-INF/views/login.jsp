@@ -5,43 +5,54 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Login page</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+    <script src="/static/js/libs/jquery/jquery.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap-responsive.min.css" media="screen" />
 </head>
 
 <body>
-<div id="authorization-container">
-    <div class="login-container" style="margin-top: 75px">
-        <div class="login-card">
-            <div class="login-form">
-                <c:url var="loginUrl" value="/login" />
-                <form action="${loginUrl}" method="post" class="form-horizontal">
-                    <c:if test="${param.error != null}">
-                        <div class="alert alert-danger">
-                            <p>Invalid username and password.</p>
-                        </div>
-                    </c:if>
-                    <c:if test="${param.logout != null}">
-                        <div class="alert alert-success">
-                            <p>You have been logged out successfully.</p>
-                        </div>
-                    </c:if>
-                    <div class="input-group input-sm">
-                        <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-                        <input type="text" class="form-control" id="username" name="login" placeholder="Enter Username" required>
-                    </div>
-                    <div class="input-group input-sm">
-                        <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-                    </div>
-                    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
-
-                    <div class="form-actions" style="margin-left: 10px; margin-right: 10px">
-                        <input type="submit"
-                               class="btn btn-block btn-primary btn-default" value="Log in">
-                    </div>
-                </form>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4 offset4">
+            <div class="signin">
+                <div class="well">
+                    <c:url var="loginUrl" value="/login" />
+                    <form action="${loginUrl}" method="post">
+                        <c:if test="${param.error != null}">
+                            <div class="alert alert-danger">
+                                <p>Invalid username and password.</p>
+                            </div>
+                        </c:if>
+                        <c:if test="${param.logout != null}">
+                            <div class="alert alert-success">
+                                <p>You have been logged out successfully.</p>
+                            </div>
+                        </c:if>
+                        <fieldset>
+                            <legend>Authorization</legend>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-lg-2 control-label">Login</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="username" name="login" placeholder="Enter Username" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                                <div class="col-lg-10">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <input type="submit" class="btn btn-primary" value="Log in">
+                                    <%--<button type="submit" class="btn btn-primary">Login</button>--%>
+                                </div>
+                            </div>
+                            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

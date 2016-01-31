@@ -77,7 +77,6 @@ public class AutoCatalogConfiguration extends WebMvcConfigurerAdapter {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        /*sessionFactory.setPackagesToScan("com.bsuir");*/
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -92,10 +91,6 @@ public class AutoCatalogConfiguration extends WebMvcConfigurerAdapter {
         return properties;
     }
 
-    /*
-     * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
-     *
-     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");

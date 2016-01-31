@@ -24,13 +24,17 @@ public class SellerServiceImpl implements SellerService {
         return sellerRepository.findAll();
     }
 
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Seller seller = sellerRepository.findByLogin("nick");
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Seller seller = sellerRepository.findByLogin(username);
         Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
         roles.add(new SimpleGrantedAuthority("Seller"));
 
         return new org.springframework.security.core.userdetails.User(seller.getLogin(),
                 seller.getPassword(),
                 roles);
+    }
+
+    public Seller findByLogin(String login) {
+        return sellerRepository.findByLogin(login);
     }
 }
