@@ -1,5 +1,7 @@
 package com.bsuir.configuration;
 
+import com.bsuir.data.service.SellerService;
+import com.bsuir.data.service.SellerServiceImpl;
 import org.hibernate.SessionFactory;
 import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,13 +92,6 @@ public class AutoCatalogConfiguration extends WebMvcConfigurerAdapter {
         return properties;
     }
 
-    /*@Bean
-    public HibernateTransactionManager transactionManager(SessionFactory sf) {
-        HibernateTransactionManager txManager = new HibernateTransactionManager();
-        txManager.setSessionFactory(sf);
-        return txManager;
-    }*/
-
     /*
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
      *
@@ -104,5 +99,10 @@ public class AutoCatalogConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+    }
+
+    @Bean
+    public SellerService getSellerService(){
+        return new SellerServiceImpl();
     }
 }

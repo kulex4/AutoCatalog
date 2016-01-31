@@ -23,6 +23,9 @@ public class Seller {
     @Column (name = "email")
     private String email;
 
+    @Column (name = "login")
+    private String login;
+
     @Column (name = "password")
     private String password;
 
@@ -58,6 +61,14 @@ public class Seller {
         this.email = email;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -77,6 +88,7 @@ public class Seller {
         if (getName() != null ? !getName().equals(seller.getName()) : seller.getName() != null) return false;
         if (getPhone() != null ? !getPhone().equals(seller.getPhone()) : seller.getPhone() != null) return false;
         if (getEmail() != null ? !getEmail().equals(seller.getEmail()) : seller.getEmail() != null) return false;
+        if (getLogin() != null ? !getLogin().equals(seller.getLogin()) : seller.getLogin() != null) return false;
         return getPassword() != null ? getPassword().equals(seller.getPassword()) : seller.getPassword() == null;
 
     }
@@ -87,6 +99,7 @@ public class Seller {
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
         result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getLogin() != null ? getLogin().hashCode() : 0);
         result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
         return result;
     }
@@ -98,6 +111,7 @@ public class Seller {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
